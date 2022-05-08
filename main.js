@@ -1,15 +1,4 @@
-
-// ### Goal: Use NASA's API to return all of their facility locations (~400). Display the name of the facility, its location, and the weather at the facility currently. 
-
-// loop - ul - append child
-
-
-// function createNasaItem() {
-//   let li = document.createElement('li');
-//   // li.textContent = ;
-//   return li;
-// }
-
+//too many requests for the weather
 let nasaURL = `https://data.nasa.gov/resource/gvk9-iz74.json`
 fetch(nasaURL)
 .then(res => res.json()) // parse response as JSON
@@ -20,8 +9,7 @@ fetch(nasaURL)
       let li = document.createElement('li');
       li.innerText= data[i].facility
     facilityAndWeather.appendChild(li);
-    // li.innerText=data[i].
-
+    li.style.listStyle = 'none'
 
     let lat = data[i].location.latitude
     let long = data[i].location.longitude
@@ -32,7 +20,9 @@ fetch(nasaURL)
     fetch(weatherUrl)
     .then(res => res.json())
     .then(data => {
-      li.innerText += `Temperature: ${data.main.temp} f ˚, Feels like: ${data.main.feels_like} f˚, Weather: ${data.weather[0].description}`       
+      li.innerText += ` Temperature: ${data.main.temp} f ˚, Feels like: ${data.main.feels_like} f˚, Weather: ${data.weather[0].description}`   
+      li.style.listStyle = 'none'
+    
     })
     
   }
@@ -40,8 +30,3 @@ fetch(nasaURL)
 .catch(err => {
   console.log(`error ${err}`)
 });
-// document.querySelector('h3').innerText = data.location.latitude
-// document.querySelector('h3').innerText = data.location.longitude
-
-// document.querySelector('h2').innerText = data.state
-// document.querySelector('h2').innerText = data.zipcode
